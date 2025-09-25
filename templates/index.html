@@ -2,9 +2,20 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Title</title>
+    <title>Weather & News Dashboard</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
 </head>
 <body>
+    <h1>🌤 Weather & 📰 News Dashboard</h1>
 
+    <h2>Weather in {{ weather.city }}</h2>
+    <p>{{ weather.description }} | {{ weather.temp }} °C</p>
+
+    <h2>Top News</h2>
+    <ul>
+      {% for article in news %}
+        <li><a href="{{ article.url }}" target="_blank">{{ article.title }}</a></li>
+      {% endfor %}
+    </ul>
 </body>
 </html>
