@@ -1,21 +1,14 @@
 from flask import Flask, render_template
+from weather.weather_api import get_weather
+from news.news_api import get_headlines
 
 app = Flask(__name__)
 
 @app.route("/")
 def home():
-    # Dummy data for now
-    weather = {
-        "city": "London",
-        "temp": 18,
-        "description": "Partly cloudy"
-    }
-
-    news = [
-        {"title": "Python 3.13 Released!", "url": "https://www.python.org"},
-        {"title": "Flask Framework Growing Strong", "url": "https://flask.palletsprojects.com"},
-        {"title": "APIs Make Life Easier", "url": "https://example.com"}
-    ]
+    # Change this to your city or load from config later
+    weather = get_weather("Považská Bystrica, SK")
+    news = get_headlines("cyberpunkgame", limit=5)  # you can change subreddit
 
     return render_template("index.html", weather=weather, news=news)
 
