@@ -1,25 +1,41 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <title>Weather & News Dashboard</title>
-    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    <!-- Metadata for the document -->
+    <meta charset="UTF-8"> <!-- Specifies the character encoding for the document -->
+    <title>Weather & News Dashboard</title> <!-- Title of the webpage -->
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}"> <!-- Links to the external CSS file -->
 </head>
 <body>
-<h1 style="text-align:center">🌤 Weather & 📰 News Dashboard</h1>
-<div class="row">
-    <div class="column">
-        <h2>Weather in {{ weather.city }}</h2>
-        <p>{{ weather.description }} | {{ weather.temp }} °C</p>
-        </div>
+    <!-- Header section -->
+    <header>
+        <h1 style="text-align:center">🌤 Weather & 📰 News Dashboard</h1> <!-- Centered heading for the dashboard -->
+    </header>
+
+    <!-- Navigation bar -->
+    <ul class="topnav">
+        <li><a href="#">Home</a></li> <!-- Link to the Home section -->
+        <li><a href="#">News</a></li> <!-- Link to the News section -->
+        <li><a href="#">Weather</a></li> <!-- Link to the Weather section -->
+    </ul>
+
+    <!-- Main content section -->
+    <div class="row">
+        <!-- Weather column -->
         <div class="column">
-        <h2>Top News</h2>
-        <ul>
-          {% for article in news %}
-            <li><a href="{{ article.url }}" target="_blank">{{ article.title }}</a></li>
-          {% endfor %}
-        </ul>
+            <h2>Weather in {{ weather.city }}</h2> <!-- Displays the city name dynamically -->
+            <p>{{ weather.description }} | {{ weather.temp }} °C</p> <!-- Displays weather description and temperature -->
         </div>
-</div>
+
+        <!-- News column -->
+        <div class="column">
+            <h2>Top News</h2> <!-- Heading for the news section -->
+            <ul>
+                {% for article in news %} <!-- Loop through the list of news articles -->
+                    <li><a href="{{ article.url }}" target="_blank">{{ article.title }}</a></li> <!-- Link to each news article -->
+                {% endfor %}
+            </ul>
+        </div>
+    </div>
 </body>
 </html>

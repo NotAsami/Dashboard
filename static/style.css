@@ -1,24 +1,94 @@
+/* 
+Styles for the header section of the webpage.
+The header has a light gray background, centered text, and padding for spacing.
+*/
+header {
+  background-color: #f1f1f1; /* Light gray background color */
+  text-align: center; /* Center-align the text */
+  padding: 10px; /* Add padding around the header */
+}
+
+/* 
+Styles for the top navigation bar (navbar).
+The navbar is displayed as a flex container with centered items, no list styles, and a dark background.
+*/
+ul.topnav {
+    display: flex; /* Use flexbox for layout */
+    justify-content: center; /* Center the navigation items */
+    list-style-type: none; /* Remove bullet points */
+    margin: 0; /* Remove default margin */
+    padding: 0; /* Remove default padding */
+    background-color: #333333; /* Dark gray background color */
+}
+
+/* 
+Styles for the links inside the navbar.
+The links are displayed as blocks, with white text, padding, and no underlines.
+*/
+ul.topnav li a {
+    display: block; /* Make the links block-level elements */
+    color: #f1f1f1; /* White text color */
+    padding: 14px 16px; /* Add padding for spacing */
+    text-decoration: none; /* Remove underline from links */
+}
+
+/* 
+Hover effect for the navbar links.
+The background changes to light gray, and the text color changes to black.
+*/
+ul.topnav li a:hover {
+    background-color: #dddddd; /* Light gray background on hover */
+    color: black; /* Black text color on hover */
+}
+
+/* 
+Global styles for the body of the webpage.
+The body uses a sans-serif font, has a light background, and a default margin.
+*/
 body {
-    font-family: Arial, sans-serif;
-    margin: 2em;
-    background: #f9f9f9;
-    color: #333;
+    font-family: Arial, sans-serif; /* Use Arial or a fallback sans-serif font */
+    margin: 2em; /* Add margin around the body */
+    background: #f9f9f9; /* Light gray background color */
+    color: #333; /* Dark gray text color */
 }
 
+/* 
+Styles for all h1 elements.
+The text color is set to a specific shade of blue.
+*/
 h1 {
-    color: #005bbb;
+    color: #005bbb; /* Blue text color */
 }
 
+/* 
+Global styles for all anchor tags (links).
+Links have no underline by default and are styled with a blue color.
+*/
 a {
-    text-decoration: none;
-    color: #005bbb;
+    text-decoration: none; /* Remove underline from links */
+    color: #005bbb; /* Blue text color */
 }
+
+/* 
+Hover effect for all links.
+The text becomes underlined when hovered over.
+*/
 a:hover {
-    text-decoration: underline;
- }
-.row {
-  display: flex;
+    text-decoration: underline; /* Add underline on hover */
 }
+
+/* 
+Styles for the row container.
+The row is displayed as a flex container for layout.
+*/
+.row {
+  display: flex; /* Use flexbox for layout */
+}
+
+/* 
+Styles for the column elements inside the row.
+Each column takes up 50% of the available space.
+*/
 .column {
-  flex: 50%;
+  flex: 50%; /* Each column takes up half the width */
 }
