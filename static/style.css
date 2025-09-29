@@ -15,4 +15,10 @@ a {
 }
 a:hover {
     text-decoration: underline;
+ }
+.row {
+  display: flex;
+}
+.column {
+  flex: 50%;
 }

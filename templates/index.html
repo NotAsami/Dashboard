@@ -6,16 +6,20 @@
     <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
 </head>
 <body>
-    <h1>🌤 Weather & 📰 News Dashboard</h1>
-
-    <h2>Weather in {{ weather.city }}</h2>
-    <p>{{ weather.description }} | {{ weather.temp }} °C</p>
-
-    <h2>Top News</h2>
-    <ul>
-      {% for article in news %}
-        <li><a href="{{ article.url }}" target="_blank">{{ article.title }}</a></li>
-      {% endfor %}
-    </ul>
+<h1 style="text-align:center">🌤 Weather & 📰 News Dashboard</h1>
+<div class="row">
+    <div class="column">
+        <h2>Weather in {{ weather.city }}</h2>
+        <p>{{ weather.description }} | {{ weather.temp }} °C</p>
+        </div>
+        <div class="column">
+        <h2>Top News</h2>
+        <ul>
+          {% for article in news %}
+            <li><a href="{{ article.url }}" target="_blank">{{ article.title }}</a></li>
+          {% endfor %}
+        </ul>
+        </div>
+</div>
 </body>
 </html>
