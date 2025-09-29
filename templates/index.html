@@ -15,7 +15,7 @@
     <!-- Navigation bar -->
     <ul class="topnav">
         <li><a href="#">Home</a></li> <!-- Link to the Home section -->
-        <li><a href="#">News</a></li> <!-- Link to the News section -->
+        <li><a href="news.html">News</a></li> <!-- Link to the News section -->
         <li><a href="#">Weather</a></li> <!-- Link to the Weather section -->
     </ul>
 
@@ -29,11 +29,17 @@
 
         <!-- News column -->
         <div class="column">
-            <h2>Top News</h2> <!-- Heading for the news section -->
+            <h2>Top News</h2>
             <ul>
-                {% for article in news %} <!-- Loop through the list of news articles -->
-                    <li><a href="{{ article.url }}" target="_blank">{{ article.title }}</a></li> <!-- Link to each news article -->
-                {% endfor %}
+              {% for article in news %}
+                <li>
+                  <a href="{{ article.url }}" target="_blank">{{ article.title }}</a>
+                  {% if article.image %}
+                    <br>
+                    <img src="{{ article.image }}" alt="preview" style="max-width:300px;">
+                  {% endif %}
+                </li>
+              {% endfor %}
             </ul>
         </div>
     </div>

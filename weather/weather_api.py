@@ -4,7 +4,6 @@ from dotenv import load_dotenv
 
 # Load .env variables
 load_dotenv()
-API_KEY = os.getenv("WEATHER_API_KEY")  # API key for OpenWeatherMap, loaded from environment variables
 
 BASE_URL = "https://api.openweathermap.org/data/2.5/weather"  # Base URL for the OpenWeatherMap API
 
@@ -26,7 +25,7 @@ def get_weather(city: str):
     """
     params = {
         "q": city,  # Query parameter for the city name
-        "appid": API_KEY,  # API key for authentication
+        "appid": os.getenv("WEATHER_API_KEY"),  # API key for authentication
         "units": "metric"  # Units for temperature (Celsius)
     }
 
