@@ -25,6 +25,23 @@ def home():
     # Render the "index.html" template with the fetched weather and news data
     return render_template("index.html", weather=weather, news=news)
 
+@app.route("/news")
+def news_page():
+    """
+    Handle the "/news" route of the web application.
+
+    Fetches top headlines from a subreddit and renders the "news.html" template
+    with the fetched data.
+
+    Returns:
+        str: Rendered HTML content for the news page.
+    """
+    # Fetch top headlines from the specified subreddit
+    news = get_headlines("cyberpunkgame", limit=10)
+
+    # Render the "news.html" template with the fetched news data
+    return render_template("news.html", news=news)
+
 if __name__ == "__main__":
     # Run the Flask application in debug mode
     app.run(debug=True)

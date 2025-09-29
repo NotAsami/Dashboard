@@ -2,14 +2,15 @@ import os
 import requests
 from dotenv import load_dotenv
 
-# Load .env variables
+# Load environment variables from a .env file
 load_dotenv()
 
-BASE_URL = "https://api.openweathermap.org/data/2.5/weather"  # Base URL for the OpenWeatherMap API
+# Base URL for the OpenWeatherMap API
+BASE_URL = "https://api.openweathermap.org/data/2.5/weather"
 
 def get_weather(city: str):
     """
-    Fetch weather data for a given city from OpenWeatherMap.
+    Fetch weather data for a given city from the OpenWeatherMap API.
 
     Args:
         city (str): The name of the city to fetch weather data for.
@@ -23,25 +24,28 @@ def get_weather(city: str):
     Raises:
         Exception: If the API request fails or returns a non-200 status code.
     """
+    # Define query parameters for the API request
     params = {
-        "q": city,  # Query parameter for the city name
+        "q": city,  # The city name to query
         "appid": os.getenv("WEATHER_API_KEY"),  # API key for authentication
-        "units": "metric"  # Units for temperature (Celsius)
+        "units": "metric"  # Use metric units (Celsius for temperature)
     }
 
-    response = requests.get(BASE_URL, params=params)  # Send a GET request to the API
+    # Send a GET request to the OpenWeatherMap API
+    response = requests.get(BASE_URL, params=params)
 
+    # Check if the response status code indicates an error
     if response.status_code != 200:
-        # Raise an exception if the API response indicates an error
-        raise Exception(f"Error fetching weather: {response.text}")
+        raise Exception(f"Error fetching weather: {response.text}")  # Raise an exception with the error message
 
-    data = response.json()  # Parse the JSON response
+    # Parse the JSON response from the API
+    data = response.json()
 
-    # Extract relevant weather data from the API response
+    # Extract and structure the relevant weather data
     weather = {
-        "city": data["name"],  # City name
-        "temp": data["main"]["temp"],  # Current temperature
-        "description": data["weather"][0]["description"].capitalize(),  # Weather description (capitalized)
+        "city": data["name"],  # The name of the city
+        "temp": data["main"]["temp"],  # The current temperature in Celsius
+        "description": data["weather"][0]["description"].capitalize(),  # Capitalized weather description
     }
 
-    return weather  # Return the extracted weather data
+    return weather  # Return the structured weather data
