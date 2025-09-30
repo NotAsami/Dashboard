@@ -13,38 +13,35 @@ reddit = praw.Reddit(
 )
 
 def get_headlines(subreddit="worldnews", limit=5):
-    """
-    Fetch top headlines from a specified subreddit, including an image URL if available.
-
-    Args:
-        subreddit (str): The name of the subreddit to fetch headlines from. Defaults to "worldnews".
-        limit (int): The maximum number of headlines to fetch. Defaults to 5.
-
-    Returns:
-        list[dict]: A list of dictionaries, each containing the following keys:
-            - "title" (str): The title of the Reddit post.
-            - "url" (str): The URL of the Reddit post.
-            - "image" (str or None): The URL of an associated image, if available.
-    """
     headlines = []
     for submission in reddit.subreddit(subreddit).hot(limit=limit):
+        if submission.stickied:
+            continue  # skip pinned posts if you want
+
         image_url = None
 
-        # Check if the submission URL is a direct image link
+        # Case 1: Direct link to an image
         if submission.url.endswith((".jpg", ".jpeg", ".png", ".gif")):
             image_url = submission.url
 
-        # Check if Reddit generated a preview with images
+        # Case 2: Gallery posts → just take the first image (ignore resolutions)
+        elif hasattr(submission, "media_metadata") and submission.media_metadata:
+            media_id, media_data = next(iter(submission.media_metadata.items()))
+            if "s" in media_data:
+                image_url = media_data["s"]["u"]   # just use "s" (usually full-size)
+            elif "p" in media_data and media_data["p"]:
+                image_url = media_data["p"][0]["u"]  # fallback: first preview size
+
+        # Case 3: Preview images (non-gallery)
         elif hasattr(submission, "preview"):
             images = submission.preview.get("images")
             if images:
                 image_url = images[0]["source"]["url"]
 
-        # Fallback to the thumbnail if it's a valid URL
-        elif submission.thumbnail and submission.thumbnail.startswith("http"):
+        # Case 4: fallback thumbnail
+        if not image_url and submission.thumbnail and submission.thumbnail.startswith("http"):
             image_url = submission.thumbnail
 
-        # Append the headline data to the list
         headlines.append({
             "title": submission.title,
             "url": submission.url,

@@ -1,24 +1,27 @@
 {% extends "base.html" %}
 
 {% block title %}
-<!-- Block for setting the title of the page -->
 News - Dashboard
 {% endblock %}
 
 {% block content %}
 <!-- Block for the main content of the page -->
-<h2>News Feed</h2>
-<ul>
+<h2>Reddit Posts from r/cyberpunkgame</h2>
+<div class="post-grid">
   {% for article in news %}
-    <li>
-      <!-- Link to the news article -->
-      <a href="{{ article.url }}" target="_blank">{{ article.title }}</a>
-      {% if article.image %}
-        <!-- Display an image preview if available -->
-        <br>
-        <img src="{{ article.image }}" alt="preview" style="max-width:300px;">
-      {% endif %}
-    </li>
+    <div class="post-card">
+      <div class="post-header">
+        <a href="{{ article.url }}" target="_blank">{{ article.title }}</a>
+      </div>
+      <div class="post-body">
+        {% if article.image %}
+          <img src="{{ article.image }}" alt="preview">
+        {% else %}
+          <p>No image available</p>
+        {% endif %}
+      </div>
+    </div>
   {% endfor %}
-</ul>
+</div>
+
 {% endblock %}

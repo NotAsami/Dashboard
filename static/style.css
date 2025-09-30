@@ -92,3 +92,58 @@ Each column takes up 50% of the available space.
 .column {
   flex: 50%; /* Each column takes up half the width */
 }
+.post-card {
+    border: 2px solid #333;
+    border-radius: 8px;
+    margin: 1em 0;
+    box-shadow: 2px 2px 6px rgba(0,0,0,0.2);
+    overflow: hidden;
+    background: #fff;
+    width: 100%;
+    max-width: 600px; /* optional: limit size */
+}
+
+.post-header {
+    background: #005bbb;
+    color: white;
+    padding: 0.5em 1em;
+    font-weight: bold;
+    font-size: 1.1em;
+}
+
+.post-header a {
+    color: white;
+    text-decoration: none;
+}
+
+.post-header a:hover {
+    text-decoration: underline;
+}
+
+.post-body {
+    padding: 0.5em;
+    text-align: center;
+    background: #f5f5f5;
+}
+
+.post-body img {
+    width: 100%;
+    height: auto;   /* keeps aspect ratio */
+    max-height: 400px; /* optional: don’t let it get too tall */
+    object-fit: contain; /* scale inside the "window" */
+}
+.post-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr); /* 2 cards per row */
+    gap: 1.5em; /* spacing between cards */
+}
+
+.post-card {
+    border: 2px solid #333;
+    border-radius: 8px;
+    box-shadow: 2px 2px 6px rgba(0,0,0,0.2);
+    overflow: hidden;
+    background: #fff;
+    display: flex;
+    flex-direction: column;
+}
