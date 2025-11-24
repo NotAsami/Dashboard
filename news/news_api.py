@@ -13,10 +13,23 @@ reddit = praw.Reddit(
 )
 
 def get_headlines(subreddit="worldnews", limit=5):
+    """
+    Fetches the top headlines from a specified subreddit.
+
+    Args:
+        subreddit (str): The name of the subreddit to fetch headlines from. Defaults to "worldnews".
+        limit (int): The maximum number of posts to retrieve. Defaults to 5.
+
+    Returns:
+        list: A list of dictionaries, each containing the title, URL, and an optional image URL of a post.
+
+    The function retrieves posts from the specified subreddit, skipping stickied posts. It attempts to extract an
+    image URL from the post, prioritizing direct image links, gallery posts, preview images, and finally thumbnails.
+    """
     headlines = []
     for submission in reddit.subreddit(subreddit).hot(limit=limit):
         if submission.stickied:
-            continue  # skip pinned posts if you want
+            continue  # Skip pinned posts if you want
 
         image_url = None
 
@@ -28,9 +41,9 @@ def get_headlines(subreddit="worldnews", limit=5):
         elif hasattr(submission, "media_metadata") and submission.media_metadata:
             media_id, media_data = next(iter(submission.media_metadata.items()))
             if "s" in media_data:
-                image_url = media_data["s"]["u"]   # just use "s" (usually full-size)
+                image_url = media_data["s"]["u"]   # Just use "s" (usually full-size)
             elif "p" in media_data and media_data["p"]:
-                image_url = media_data["p"][0]["u"]  # fallback: first preview size
+                image_url = media_data["p"][0]["u"]  # Fallback: first preview size
 
         # Case 3: Preview images (non-gallery)
         elif hasattr(submission, "preview"):
@@ -38,7 +51,7 @@ def get_headlines(subreddit="worldnews", limit=5):
             if images:
                 image_url = images[0]["source"]["url"]
 
-        # Case 4: fallback thumbnail
+        # Case 4: Fallback thumbnail
         if not image_url and submission.thumbnail and submission.thumbnail.startswith("http"):
             image_url = submission.thumbnail
 
