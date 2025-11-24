@@ -1,26 +1,64 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <!-- Define the character encoding and set the title block -->
     <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Weather and News Dashboard - Get real-time weather updates and trending Reddit posts">
     <title>{% block title %}Dashboard{% endblock %}</title>
+
     <!-- Link to the external CSS file for styling -->
     <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+
+    <!-- Favicon -->
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🌤️</text></svg>">
 </head>
 <body>
     <header>
         <!-- Header section with a centered title -->
-        <h1 style="text-align:center">🌤 Weather & 📰 News Dashboard</h1>
+        <h1>🌤️ Weather & 📰 News Dashboard</h1>
     </header>
 
-    <ul class="topnav">
-        <!-- Navigation bar with links to different pages -->
-        <li><a href="{{ url_for('home') }}">Home</a></li>
-        <li><a href="{{ url_for('news_page') }}">News</a></li>
-        <li><a href="#">Weather</a></li>
-    </ul>
+    <nav>
+        <ul class="topnav">
+            <!-- Navigation bar with links to different pages -->
+            <li><a href="{{ url_for('home') }}">🏠 Home</a></li>
+            <li><a href="{{ url_for('news_page') }}">📰 News</a></li>
+            <li><a href="{{ url_for('home') }}">🌡️ Weather</a></li>
+        </ul>
+    </nav>
 
-    <!-- Block for the main content of the page -->
-    {% block content %}{% endblock %}
+    <main>
+        <!-- Block for the main content of the page -->
+        {% block content %}{% endblock %}
+    </main>
+
+    <!-- Optional: Add a footer -->
+    <footer style="text-align: center; padding: 2rem; color: white; opacity: 0.8; margin-top: 3rem;">
+        <p>&copy; 2024 Weather & News Dashboard | Built with Flask</p>
+    </footer>
+
+    <!-- Optional: Add smooth scroll behavior -->
+    <script>
+        // Add smooth scrolling
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({ behavior: 'smooth' });
+                }
+            });
+        });
+
+        // Add active state to navigation
+        const currentLocation = location.pathname;
+        const menuItems = document.querySelectorAll('.topnav a');
+        menuItems.forEach(item => {
+            if (item.getAttribute('href') === currentLocation) {
+                item.style.color = '#667eea';
+                item.style.fontWeight = '700';
+            }
+        });
+    </script>
 </body>
 </html>

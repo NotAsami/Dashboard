@@ -1,27 +1,37 @@
 {% extends "base.html" %}
 
 {% block title %}
-News - Dashboard
+News - Reddit Posts Dashboard
 {% endblock %}
 
 {% block content %}
-<!-- Block for the main content of the page -->
-<h2>Reddit Posts from r/cyberpunkgame</h2>
-<div class="post-grid">
-  {% for article in news %}
-    <div class="post-card">
-      <div class="post-header">
-        <a href="{{ article.url }}" target="_blank">{{ article.title }}</a>
-      </div>
-      <div class="post-body">
-        {% if article.image %}
-          <img src="{{ article.image }}" alt="preview">
-        {% else %}
-          <p>No image available</p>
-        {% endif %}
-      </div>
-    </div>
-  {% endfor %}
-</div>
+<h2>🎮 Reddit Posts from r/cyberpunkgame</h2>
 
+{% if news %}
+    <div class="post-grid">
+        {% for article in news %}
+            <div class="post-card">
+                <div class="post-header">
+                    <a href="{{ article.url }}" target="_blank" rel="noopener noreferrer">
+                        {{ article.title }}
+                    </a>
+                </div>
+                <div class="post-body">
+                    {% if article.image %}
+                        <img src="{{ article.image }}" alt="{{ article.title }}" loading="lazy">
+                    {% else %}
+                        <p>🖼️ No image available</p>
+                    {% endif %}
+                </div>
+            </div>
+        {% endfor %}
+    </div>
+{% else %}
+    <div style="max-width: 600px; margin: 2rem auto;">
+        <div class="error">
+            <p style="font-size: 1.2rem; margin-bottom: 0.5rem;">⚠️ Unable to load Reddit posts</p>
+            <p style="font-size: 0.9rem;">Please check your internet connection or try again later.</p>
+        </div>
+    </div>
+{% endif %}
 {% endblock %}

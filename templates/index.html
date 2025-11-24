@@ -1,34 +1,50 @@
 {% extends "base.html" %}
 
 {% block title %}
-Home - Dashboard
+Home - Weather & News Dashboard
 {% endblock %}
 
 {% block content %}
-<!-- Block for the main content of the page -->
 <div class="row">
+    <!-- Weather Column -->
     <div class="column">
-        <!-- Section displaying the weather information -->
-        <h2>Weather in {{ weather.city }}</h2>
-        <p>{{ weather.description }} | {{ weather.temp }} °C</p>
+        <h2>🌡️ Weather</h2>
+        {% if weather %}
+            <div style="text-align: center; padding: 1rem 0;">
+                <div style="font-size: 3.5rem; font-weight: 700; color: #667eea; margin: 1rem 0;">
+                    {{ weather.temp|round|int }}°C
+                </div>
+                <div style="font-size: 1.3rem; color: #4a5568; text-transform: capitalize; margin-bottom: 1rem;">
+                    {{ weather.description }}
+                </div>
+                <div style="font-size: 1.1rem; color: #718096;">
+                    📍 {{ weather.city }}
+                </div>
+            </div>
+        {% else %}
+            <p class="error">⚠️ Unable to load weather data</p>
+        {% endif %}
     </div>
 
+    <!-- News Column -->
     <div class="column">
-        <!-- Section displaying the top news headlines -->
-        <h2>Top News</h2>
-        <ul>
-          {% for article in news %}
-            <li>
-              <!-- Link to the news article -->
-              <a href="{{ article.url }}" target="_blank">{{ article.title }}</a>
-              {% if article.image %}
-                <!-- Display an image preview if available -->
-                <br>
-                <img src="{{ article.image }}" alt="preview" style="max-width:300px;">
-              {% endif %}
-            </li>
-          {% endfor %}
-        </ul>
+        <h2>📱 Trending on Reddit</h2>
+        {% if news %}
+            <ul>
+                {% for article in news %}
+                    <li>
+                        <a href="{{ article.url }}" target="_blank" rel="noopener noreferrer">
+                            {{ article.title }}
+                        </a>
+                        {% if article.image %}
+                            <img src="{{ article.image }}" alt="{{ article.title }}" loading="lazy">
+                        {% endif %}
+                    </li>
+                {% endfor %}
+            </ul>
+        {% else %}
+            <p class="error">⚠️ Unable to load news</p>
+        {% endif %}
     </div>
 </div>
 {% endblock %}

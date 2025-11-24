@@ -1,149 +1,429 @@
-/* 
-Styles for the header section of the webpage.
-The header has a light gray background, centered text, and padding for spacing.
-*/
-header {
-  background-color: #f1f1f1; /* Light gray background color */
-  text-align: center; /* Center-align the text */
-  padding: 10px; /* Add padding around the header */
+/* ==========================================
+   MODERN WEATHER & NEWS DASHBOARD STYLES
+   ========================================== */
+
+/* CSS Variables for Easy Theme Customization */
+:root {
+    --primary-color: #667eea;
+    --primary-dark: #5568d3;
+    --secondary-color: #764ba2;
+    --accent-color: #f093fb;
+    --text-dark: #2d3748;
+    --text-medium: #4a5568;
+    --text-light: #718096;
+    --bg-light: #f7fafc;
+    --bg-white: #ffffff;
+    --border-light: #e2e8f0;
+    --shadow-sm: 0 2px 4px rgba(0, 0, 0, 0.1);
+    --shadow-md: 0 4px 6px rgba(0, 0, 0, 0.1);
+    --shadow-lg: 0 10px 25px rgba(0, 0, 0, 0.15);
+    --shadow-xl: 0 20px 40px rgba(0, 0, 0, 0.2);
+    --radius-sm: 8px;
+    --radius-md: 12px;
+    --radius-lg: 16px;
+    --radius-xl: 20px;
 }
 
-/* 
-Styles for the top navigation bar (navbar).
-The navbar is displayed as a flex container with centered items, no list styles, and a dark background.
-*/
-ul.topnav {
-    display: flex; /* Use flexbox for layout */
-    justify-content: center; /* Center the navigation items */
-    list-style-type: none; /* Remove bullet points */
-    margin: 0; /* Remove default margin */
-    padding: 0; /* Remove default padding */
-    background-color: #333333; /* Dark gray background color */
+/* Reset and Base Styles */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
 }
 
-/* 
-Styles for the links inside the navbar.
-The links are displayed as blocks, with white text, padding, and no underlines.
-*/
-ul.topnav li a {
-    display: block; /* Make the links block-level elements */
-    color: #f1f1f1; /* White text color */
-    padding: 14px 16px; /* Add padding for spacing */
-    text-decoration: none; /* Remove underline from links */
-}
-
-/* 
-Hover effect for the navbar links.
-The background changes to light gray, and the text color changes to black.
-*/
-ul.topnav li a:hover {
-    background-color: #dddddd; /* Light gray background on hover */
-    color: black; /* Black text color on hover */
-}
-
-/* 
-Global styles for the body of the webpage.
-The body uses a sans-serif font, has a light background, and a default margin.
-*/
 body {
-    font-family: Arial, sans-serif; /* Use Arial or a fallback sans-serif font */
-    margin: 2em; /* Add margin around the body */
-    background: #f9f9f9; /* Light gray background color */
-    color: #333; /* Dark gray text color */
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
+                 'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue', sans-serif;
+    background: linear-gradient(135deg, var(--primary-color) 0%, var(--secondary-color) 100%);
+    background-attachment: fixed;
+    color: var(--text-dark);
+    line-height: 1.6;
+    min-height: 100vh;
+    margin: 0;
+    padding: 0;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
 }
 
-/* 
-Styles for all h1 elements.
-The text color is set to a specific shade of blue.
-*/
-h1 {
-    color: #005bbb; /* Blue text color */
+/* Header Styles */
+header {
+    background: rgba(255, 255, 255, 0.95);
+    backdrop-filter: blur(10px);
+    text-align: center;
+    padding: 2rem 1rem;
+    box-shadow: var(--shadow-lg);
+    animation: slideDown 0.6s ease-out;
+    position: sticky;
+    top: 0;
+    z-index: 100;
 }
 
-/* 
-Global styles for all anchor tags (links).
-Links have no underline by default and are styled with a blue color.
-*/
-a {
-    text-decoration: none; /* Remove underline from links */
-    color: #005bbb; /* Blue text color */
+header h1 {
+    color: var(--primary-color);
+    font-size: 2.5rem;
+    font-weight: 700;
+    margin: 0;
+    background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
 }
 
-/* 
-Hover effect for all links.
-The text becomes underlined when hovered over.
-*/
-a:hover {
-    text-decoration: underline; /* Add underline on hover */
+/* Navigation Bar */
+ul.topnav {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    background: rgba(255, 255, 255, 0.98);
+    box-shadow: var(--shadow-md);
+    position: sticky;
+    top: 0;
+    z-index: 99;
 }
 
-/* 
-Styles for the row container.
-The row is displayed as a flex container for layout.
-*/
-.row {
-  display: flex; /* Use flexbox for layout */
+ul.topnav li {
+    margin: 0;
 }
 
-/* 
-Styles for the column elements inside the row.
-Each column takes up 50% of the available space.
-*/
-.column {
-  flex: 50%; /* Each column takes up half the width */
-}
-.post-card {
-    border: 2px solid #333;
-    border-radius: 8px;
-    margin: 1em 0;
-    box-shadow: 2px 2px 6px rgba(0,0,0,0.2);
+ul.topnav li a {
+    display: block;
+    color: var(--text-dark);
+    padding: 1rem 2rem;
+    text-decoration: none;
+    font-weight: 600;
+    transition: all 0.3s ease;
+    position: relative;
     overflow: hidden;
-    background: #fff;
+}
+
+ul.topnav li a::before {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 50%;
+    width: 0;
+    height: 3px;
+    background: linear-gradient(90deg, var(--primary-color), var(--secondary-color));
+    transition: all 0.3s ease;
+    transform: translateX(-50%);
+}
+
+ul.topnav li a:hover {
+    color: var(--primary-color);
+    background: rgba(102, 126, 234, 0.05);
+}
+
+ul.topnav li a:hover::before {
+    width: 80%;
+}
+
+/* Main Content Container */
+.row {
+    display: grid;
+    grid-template-columns: 1fr 1.5fr;
+    gap: 2rem;
+    max-width: 1400px;
+    margin: 2rem auto;
+    padding: 0 2rem;
+    animation: fadeIn 0.8s ease-out;
+}
+
+@media (max-width: 968px) {
+    .row {
+        grid-template-columns: 1fr;
+        padding: 0 1rem;
+    }
+}
+
+/* Column Styles */
+.column {
+    background: rgba(255, 255, 255, 0.95);
+    backdrop-filter: blur(10px);
+    border-radius: var(--radius-xl);
+    padding: 2rem;
+    box-shadow: var(--shadow-lg);
+    transition: all 0.3s ease;
+}
+
+.column:hover {
+    transform: translateY(-5px);
+    box-shadow: var(--shadow-xl);
+}
+
+.column h2 {
+    color: var(--primary-color);
+    font-size: 1.8rem;
+    margin-bottom: 1.5rem;
+    padding-bottom: 0.75rem;
+    border-bottom: 3px solid var(--border-light);
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.column p {
+    font-size: 1.2rem;
+    color: var(--text-medium);
+    padding: 1rem;
+    background: var(--bg-light);
+    border-radius: var(--radius-md);
+    border-left: 4px solid var(--primary-color);
+}
+
+/* Links */
+a {
+    text-decoration: none;
+    color: var(--primary-color);
+    transition: color 0.3s ease;
+}
+
+a:hover {
+    color: var(--secondary-color);
+}
+
+/* List Styles */
+ul {
+    list-style: none;
+    padding: 0;
+}
+
+.column ul li {
+    background: var(--bg-light);
+    margin: 1rem 0;
+    padding: 1.5rem;
+    border-radius: var(--radius-md);
+    border-left: 4px solid var(--primary-color);
+    transition: all 0.3s ease;
+    box-shadow: var(--shadow-sm);
+}
+
+.column ul li:hover {
+    transform: translateX(8px);
+    box-shadow: var(--shadow-md);
+    border-left-color: var(--secondary-color);
+    background: var(--bg-white);
+}
+
+.column ul li a {
+    font-weight: 600;
+    font-size: 1.1rem;
+    display: block;
+    margin-bottom: 0.75rem;
+    line-height: 1.4;
+}
+
+.column ul li img {
     width: 100%;
-    max-width: 600px; /* optional: limit size */
+    max-width: 100%;
+    height: auto;
+    max-height: 300px;
+    object-fit: cover;
+    border-radius: var(--radius-md);
+    margin-top: 0.75rem;
+    box-shadow: var(--shadow-md);
+    transition: transform 0.3s ease;
+}
+
+.column ul li img:hover {
+    transform: scale(1.02);
+}
+
+/* Post Grid Layout (for news.html) */
+.post-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    gap: 2rem;
+    max-width: 1400px;
+    margin: 2rem auto;
+    padding: 0 2rem;
+    animation: fadeIn 0.8s ease-out;
+}
+
+@media (max-width: 768px) {
+    .post-grid {
+        grid-template-columns: 1fr;
+        padding: 0 1rem;
+    }
+}
+
+/* Post Card Styles */
+.post-card {
+    background: rgba(255, 255, 255, 0.95);
+    backdrop-filter: blur(10px);
+    border-radius: var(--radius-lg);
+    overflow: hidden;
+    box-shadow: var(--shadow-lg);
+    transition: all 0.3s ease;
+    display: flex;
+    flex-direction: column;
+    border: 1px solid rgba(255, 255, 255, 0.3);
+}
+
+.post-card:hover {
+    transform: translateY(-8px) scale(1.02);
+    box-shadow: var(--shadow-xl);
 }
 
 .post-header {
-    background: #005bbb;
+    background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
     color: white;
-    padding: 0.5em 1em;
-    font-weight: bold;
-    font-size: 1.1em;
+    padding: 1.25rem 1.5rem;
+    font-weight: 700;
+    font-size: 1rem;
+    line-height: 1.4;
 }
 
 .post-header a {
     color: white;
     text-decoration: none;
+    display: block;
+    transition: opacity 0.3s ease;
 }
 
 .post-header a:hover {
+    opacity: 0.9;
     text-decoration: underline;
 }
 
 .post-body {
-    padding: 0.5em;
+    padding: 1rem;
     text-align: center;
-    background: #f5f5f5;
+    background: var(--bg-light);
+    flex-grow: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 200px;
 }
 
 .post-body img {
     width: 100%;
-    height: auto;   /* keeps aspect ratio */
-    max-height: 400px; /* optional: don’t let it get too tall */
-    object-fit: contain; /* scale inside the "window" */
-}
-.post-grid {
-    display: grid;
-    grid-template-columns: repeat(2, 1fr); /* 2 cards per row */
-    gap: 1.5em; /* spacing between cards */
+    height: auto;
+    max-height: 350px;
+    object-fit: cover;
+    border-radius: var(--radius-sm);
+    box-shadow: var(--shadow-sm);
+    transition: transform 0.3s ease;
 }
 
-.post-card {
-    border: 2px solid #333;
-    border-radius: 8px;
-    box-shadow: 2px 2px 6px rgba(0,0,0,0.2);
-    overflow: hidden;
-    background: #fff;
-    display: flex;
-    flex-direction: column;
+.post-body img:hover {
+    transform: scale(1.05);
+}
+
+.post-body p {
+    color: var(--text-light);
+    font-style: italic;
+    padding: 2rem;
+}
+
+/* Page-Specific Heading */
+h2 {
+    color: white;
+    text-align: center;
+    font-size: 2rem;
+    margin: 2rem 0 1rem;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2);
+}
+
+/* Animations */
+@keyframes slideDown {
+    from {
+        opacity: 0;
+        transform: translateY(-30px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* Loading State */
+.loading {
+    text-align: center;
+    padding: 3rem;
+    color: var(--text-light);
+    font-size: 1.2rem;
+    font-style: italic;
+}
+
+/* Error State */
+.error {
+    background: #fed7d7;
+    color: #c53030;
+    padding: 1rem;
+    border-radius: var(--radius-md);
+    text-align: center;
+    margin: 1rem 0;
+    border-left: 4px solid #c53030;
+}
+
+/* Scrollbar Styling */
+::-webkit-scrollbar {
+    width: 10px;
+}
+
+::-webkit-scrollbar-track {
+    background: rgba(255, 255, 255, 0.1);
+}
+
+::-webkit-scrollbar-thumb {
+    background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+    border-radius: 5px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background: var(--primary-dark);
+}
+
+/* Responsive Typography */
+@media (max-width: 768px) {
+    header h1 {
+        font-size: 1.8rem;
+    }
+
+    .column h2 {
+        font-size: 1.5rem;
+    }
+
+    ul.topnav li a {
+        padding: 0.75rem 1rem;
+        font-size: 0.9rem;
+    }
+}
+
+/* Focus Styles for Accessibility */
+a:focus,
+button:focus {
+    outline: 2px solid var(--primary-color);
+    outline-offset: 2px;
+}
+
+/* Print Styles */
+@media print {
+    body {
+        background: white;
+    }
+
+    .topnav {
+        display: none;
+    }
+
+    .column {
+        box-shadow: none;
+        border: 1px solid #ddd;
+    }
 }
